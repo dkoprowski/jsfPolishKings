@@ -19,6 +19,10 @@ min-height: 760px;
 margin: auto;
 }
 
+.lang{
+	float: right;
+}
+
 .heading{
 	text-align: center;
 	width: 80%;

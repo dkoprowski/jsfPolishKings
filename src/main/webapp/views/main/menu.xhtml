@@ -2,7 +2,10 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	>
   <div>
 	<h:form>
 	  <ul class="x">
@@ -15,8 +18,15 @@
 		  <h:commandLink  class="btn btn-primary" action="showKings?faces-redirect=true">
 			 <h:outputText value="#{local.showKingsLabel}" />
 		  </h:commandLink>
-		</li>
-	</ul>
+		</li></ul>
+		<div class="lang">
+		<f:view locale="#{switcher.locale}">
+    		<h:commandLink class="btn btn-primary" value="English" action="#{switcher.switchLocale('en')}" />
+   			<h:commandLink class="btn btn-primary" value="Polski" action="#{switcher.switchLocale('pl')}" />
+    
+		</f:view>
+		</div>
+	
    </h:form>
   </div>
 </ui:composition>

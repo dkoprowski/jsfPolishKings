@@ -19,9 +19,9 @@
 
 				<h:outputText value="#{local.authorsEmail}" />
 					
-				<h:inputText id="authorsEmail" value="#{kingBean.king.authorsEmail}">
+				<rich:inplaceInput id="authorsEmail" defaultLabel="Click to enter your email" value="#{kingBean.king.authorsEmail}">
 					<a4j:ajax render="email" execute="@this" />
-				</h:inputText>
+				</rich:inplaceInput>
 
 
 				<h:outputText value="#{local.startRulingLabel}" />
@@ -41,9 +41,10 @@
 				</rich:calendar>
 				
 				<h:outputText value="#{local.numberOfKids}" />
-				<h:inputText id="children" value="#{kingBean.king.numOfChildren}">
+				 
+				<rich:inputNumberSpinner id="children" value="#{kingBean.king.numOfChildren}">
 					<a4j:ajax render="children" execute="@this" />
-				</h:inputText>
+				</rich:inputNumberSpinner>
 			</h:panelGrid>
 			<hr/>
 			<a4j:outputPanel ajaxRendered="true">
