@@ -9,22 +9,39 @@
 	
     <h:form>
     
-     <h:dataTable value="#{personBean.allPersons}" var="item">
-      <f:facet name="header">#{msg.personAllLabel}</f:facet>
+     <h:dataTable class="table" value="#{kingBean.allKings}" var="item">
+      <f:facet name="header">#{local.kingAllLabel}</f:facet>
       
       <h:column>
-        <f:facet name="header">#{msg.personFirstNameLabel}</f:facet>
-        #{item.firstName}
+        <f:facet name="header">#{local.kingName}</f:facet>
+        #{item.name}
       </h:column>
       
       <h:column>
-        <f:facet name="header">#{msg.personPinLabel}</f:facet>
-        #{item.pin}
+        <f:facet name="header">#{local.authorsEmail}</f:facet>
+        #{item.authorsEmail}
+      </h:column>
+      
+       <h:column>
+        <f:facet name="header">#{local.startRulingLabel}</f:facet>
+        #{item.niceStartOfRule}
       </h:column>
       
       <h:column>
-        <f:facet name="header">#{msg.action}</f:facet>
-        <h:commandLink value="#{msg.actionDelete}" action="#{personBean.deletePerson}"/>
+        <f:facet name="header">#{local.endRulingLabel}</f:facet>
+        #{item.niceEndOfRule}
+      </h:column>
+      
+      <h:column>
+        <f:facet name="header">#{local.numberOfKids}</f:facet>
+        #{item.numOfChildren}
+      </h:column>
+      
+     
+      
+      <h:column>
+        <f:facet name="header">#{local.action}</f:facet>
+        <h:commandLink   class="btn-primary btn-sm" value="#{local.actionDelete}" action="#{kingBean.deleteKing}"/>
       </h:column>
       
      </h:dataTable>

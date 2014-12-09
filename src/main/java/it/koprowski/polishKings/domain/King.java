@@ -1,5 +1,6 @@
-package com.example.jsfdemo.domain;
+package it.koprowski.polishKings.domain;
 
+import java.text.DateFormat;
 import java.util.Date;
 
 import javax.validation.constraints.Min;
@@ -7,38 +8,63 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-public class Person {
+import org.junit.Before;
+import org.junit.experimental.theories.DataPoint;
+
+public class King {
 	
-	private String firstName = "unknown";
-	private String zipCode = "";
-	private String pin = "";
-	private Date dateOfBirth = new Date();
-	private double weight;
-	private boolean married;
-	private int numOfChildren;
+	private String name = "someKing";
+	private String authorsEmail = "author@mail.com";
+	public Date startOfRule = new Date();
+	public Date endOfRule = new Date();
+	private int numOfChildren = 0;
 	
-	@Size(min = 2, max = 20)
-	public String getFirstName() {
-		return firstName;
+	@Size(min = 2, max = 40)
+	public String getName() {
+		return name;
 	}
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-	
-	@Pattern(regexp = "[0-9]{2}-[0-9]{3}")
-	public String getZipCode() {
-		return zipCode;
-	}
-	public void setZipCode(String zipCode) {
-		this.zipCode = zipCode;
+	public void setName(String name) {
+		this.name = name;
 	}
 	
-	@Size(min = 2)
-	public String getPin() {
-		return pin;
+	
+	@Pattern(regexp = "[aA-zZ0-9\\.]+@[aA-zZ0-9\\.]+(\\.)+[aA-zZ0-9\\.]+")
+	public String getAuthorsEmail() {
+		return authorsEmail;
 	}
-	public void setPin(String pin) {
-		this.pin = pin;
+	public void setAuthorsEmail(String _email) {
+		this.authorsEmail = _email;
+	}
+	
+	
+	
+	public Date getStartOfRule() {
+		
+		return startOfRule;
+		//return DateFormat.getDateInstance(DateFormat.SHORT).format(startOfRule);
+	}
+	
+	public String getNiceStartOfRule() {
+		
+		
+		return DateFormat.getDateInstance(DateFormat.SHORT).format(startOfRule);
+	}
+	
+	public void setStartOfRule(Date startOfRule) {
+		this.startOfRule = startOfRule;
+	}
+	
+	public String getNiceEndOfRule() {
+		return DateFormat.getDateInstance(DateFormat.SHORT).format(endOfRule);
+	}
+	
+	@Past
+	public Date getEndOfRule() {
+		return endOfRule;
+		//return DateFormat.getDateInstance(DateFormat.SHORT).format(endOfRule);
+	}
+	public void setEndOfRule(Date endOfRule) {
+		this.endOfRule = endOfRule;
 	}
 	
 	@Min(0)
@@ -47,28 +73,6 @@ public class Person {
 	}
 	public void setNumOfChildren(int numOfChildren) {
 		this.numOfChildren = numOfChildren;
-	}
-	
-	@Past
-	public Date getDateOfBirth() {
-		return dateOfBirth;
-	}
-	public void setDateOfBirth(Date dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
-	}
-	
-	public double getWeight() {
-		return weight;
-	}
-	public void setWeight(double weight) {
-		this.weight = weight;
-	}
-	
-	public boolean isMarried() {
-		return married;
-	}
-	public void setMarried(boolean married) {
-		this.married = married;
 	}
 	
 }

@@ -12,6 +12,11 @@
 			<var>msg</var>
 		</resource-bundle>
 
+		<resource-bundle>
+			<base-name>it.koprowski.polishKings.localization</base-name>
+			<var>local</var>
+		</resource-bundle>
+
 		<message-bundle>com.example.jsfdemo.errormessages</message-bundle>
 
 		<locale-config>

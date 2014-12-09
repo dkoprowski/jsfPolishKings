@@ -5,19 +5,15 @@
 	xmlns:h="http://java.sun.com/jsf/html">
   <div>
 	<h:form>
-	  <ul>
+	  <ul class="x">
+
 		<li>
-		  <h:commandLink action="home?faces-redirect=true">
-			<h:outputText value="#{msg.linkHome}" />
-		  </h:commandLink>
-		</li>
-		<li>
-		  <h:commandLink action="add?faces-redirect=true">
-			<h:outputText value="#{msg.personAddLabel}" />
+		  <h:commandLink  class="btn btn-primary" action="addKing?faces-redirect=true">
+			<h:outputText value="#{local.addKingLabel}" />
 		  </h:commandLink></li>
 		<li>
-		  <h:commandLink action="showPersons?faces-redirect=true">
-			 <h:outputText value="#{msg.personAllLabel}" />
+		  <h:commandLink  class="btn btn-primary" action="showKings?faces-redirect=true">
+			 <h:outputText value="#{local.showKingsLabel}" />
 		  </h:commandLink>
 		</li>
 	</ul>

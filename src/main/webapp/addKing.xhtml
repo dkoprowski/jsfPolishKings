@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/templates/default.xhtml"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+	<ui:define name="content">
+		<h:form id="personForm">
+		<f:event type="postValidate" listener="#{kingBean.validateDate}"/>
+			<h:panelGrid columns="2">
+			
+				<h:outputText value="#{local.kingName}" />
+				<h:inputText id="name" value="#{kingBean.king.name}">
+					<a4j:ajax render="name" execute="@this" />
+				</h:inputText>
+
+				<h:outputText value="#{local.authorsEmail}" />
+					
+				<h:inputText id="authorsEmail" value="#{kingBean.king.authorsEmail}">
+					<a4j:ajax render="email" execute="@this" />
+				</h:inputText>
+
+
+				<h:outputText value="#{local.startRulingLabel}" />
+
+				<rich:calendar value="#{kingBean.king.startOfRule}"
+					id="calendar1" datePattern="dd.MM.yyyy" showApplyButton="#{true}"
+					cellWidth="24px" cellHeight="22px" style="width:200px">
+					<a4j:ajax render="messages" execute="@this" />
+				</rich:calendar>
+				
+				<h:outputText value="#{local.endRulingLabel}" />
+
+				<rich:calendar value="#{kingBean.king.endOfRule}"
+					id="calendar2" datePattern="dd.MM.yyyy" showApplyButton="#{true}"
+					cellWidth="24px" cellHeight="22px" style="width:200px">
+					<a4j:ajax render="messages" execute="@this" />
+				</rich:calendar>
+				
+				<h:outputText value="#{local.numberOfKids}" />
+				<h:inputText id="children" value="#{kingBean.king.numOfChildren}">
+					<a4j:ajax render="children" execute="@this" />
+				</h:inputText>
+			</h:panelGrid>
+			<hr/>
+			<a4j:outputPanel ajaxRendered="true">
+				<h:panelGrid columns="2">
+
+					<h:outputText value="#{local.kingName}" />
+					<h:outputText id="nameOutput" value="#{kingBean.king.name}" />
+
+					<h:outputText value="#{local.authorsEmail}" />
+					<h:outputText id="authorsEmailOutput" value="#{kingBean.king.authorsEmail}" />
+
+
+					<h:outputText value="#{local.startRulingLabel}" />
+					<h:outputText id="startOfRuleOutput"
+						value="#{kingBean.king.niceStartOfRule}" />
+
+					<h:outputText value="#{local.endRulingLabel}" />
+					<h:outputText id="endOfRuleOutput"
+						value="#{kingBean.king.niceEndOfRule}" />
+						
+					<h:outputText value="#{local.numberOfKids}" />
+					<h:outputText id="numberOfKidsOutput" 
+						value="#{kingBean.king.numOfChildren}" />
+				</h:panelGrid>
+			</a4j:outputPanel>
+			
+			<h:commandButton value="#{local.submitButton}"
+				action="#{kingBean.addKing}" />
+				
+				<h:panelGrid>
+					<h:messages id="messages" showDetail="#{true}" showSummary="#{false}"/>
+				</h:panelGrid>
+		</h:form>
+
+	</ui:define>
+</ui:composition>

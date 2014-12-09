@@ -1,4 +1,7 @@
-package com.example.jsfdemo.web;
+package it.koprowski.polishKings.web;
+
+import it.koprowski.polishKings.domain.King;
+import it.koprowski.polishKings.service.KingManager;
 
 import java.io.Serializable;
 import java.util.Calendar;
@@ -16,57 +19,54 @@ import javax.faces.validator.ValidatorException;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.example.jsfdemo.domain.Person;
-import com.example.jsfdemo.service.PersonManager;
-
 @SessionScoped
-@Named("personBean")
-public class PersonFormBean implements Serializable {
+@Named("kingBean")
+public class KingFormBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private Person person = new Person();
+	private King king = new King();
 
-	private ListDataModel<Person> persons = new ListDataModel<Person>();
+	private ListDataModel<King> kingsList = new ListDataModel<King>();
 
 	@Inject
-	private PersonManager pm;
+	private KingManager kingManager;
 
-	public Person getPerson() {
-		return person;
+	public King getKing() {
+		return king;
 	}
 
-	public void setPerson(Person person) {
-		this.person = person;
+	public void setKing(King king) {
+		this.king = king;
 	}
 
-	public ListDataModel<Person> getAllPersons() {
-		persons.setWrappedData(pm.getAllPersons());
-		return persons;
+	public ListDataModel<King> getAllKings() {
+		kingsList.setWrappedData(kingManager.getAllKings());
+		return kingsList;
 	}
 
 	// Actions
-	public String addPerson() {
-		pm.addPerson(person);
+	public String addKing() {
+		kingManager.addKing(king);
 		return "showPersons";
 		//return null;
 	}
 
-	public String deletePerson() {
-		Person personToDelete = persons.getRowData();
-		pm.deletePerson(personToDelete);
+	public String deleteKing() {
+		King kingToDelete = kingsList.getRowData();
+		kingManager.removeKing(kingToDelete);
 		return null;
 	}
 
 	// Validators
-
+/*
 	// Business logic validation
 	public void uniquePin(FacesContext context, UIComponent component,
 			Object value) {
 
 		String pin = (String) value;
 
-		for (Person person : pm.getAllPersons()) {
+		for (King person : kingManager.getAllPersons()) {
 			if (person.getPin().equalsIgnoreCase(pin)) {
 				FacesMessage message = new FacesMessage(
 						"Person with this PIN already exists in database");
@@ -75,10 +75,11 @@ public class PersonFormBean implements Serializable {
 			}
 		}
 	}
-
+*/
 	// Multi field validation with <f:event>
 	// Rule: first two digits of PIN must match last two digits of the year of
 	// birth
+	/*
 	public void validatePinDob(ComponentSystemEvent event) {
 
 		UIForm form = (UIForm) event.getComponent();
@@ -101,5 +102,29 @@ public class PersonFormBean implements Serializable {
 				context.renderResponse();
 			}
 		}
+	}
+	*/
+	
+	public void validateDate(ComponentSystemEvent event) {
+
+		UIForm form = (UIForm) event.getComponent();
+		UIInput startDate = (UIInput) form.findComponent("calendar1");
+		UIInput endDate = (UIInput) form.findComponent("calendar2");
+
+		if (startDate.getValue() != null && endDate.getValue() != null)
+		{
+			Calendar startCal = Calendar.getInstance();
+			Calendar endCal = Calendar.getInstance();
+			startCal.setTime((Date)startDate.getValue());
+			endCal.setTime((Date)endDate.getValue());
+			
+			if(!endCal.after(startCal)){
+				FacesContext context = FacesContext.getCurrentInstance();
+				context.addMessage(form.getClientId(), new FacesMessage(
+						"Finish date cannot be before start date!"));
+				context.renderResponse();
+			}
+		}
+		
 	}
 }

@@ -1,44 +1,48 @@
-package com.example.jsfdemo.service;
+package it.koprowski.polishKings.service;
+
+import it.koprowski.polishKings.domain.King;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
 
-import com.example.jsfdemo.domain.Person;
-
 @ApplicationScoped
-public class PersonManager {
-	private List<Person> db = new ArrayList<Person>();
+public class KingManager {
+	private List<King> database = new ArrayList<King>();
 
-	public void addPerson(Person person) {
-		Person newPerson = new Person();
+	public void addKing(King _king) {
+		King newKing = new King();
 
-		newPerson.setFirstName(person.getFirstName());
-		newPerson.setZipCode(person.getZipCode());
-		newPerson.setPin(person.getPin());
-		newPerson.setDateOfBirth(person.getDateOfBirth());
-		newPerson.setMarried(person.isMarried());
-		newPerson.setWeight(person.getWeight());
-		newPerson.setNumOfChildren(person.getNumOfChildren());
+		newKing.setName(_king.getName());
+		newKing.setAuthorsEmail(_king.getAuthorsEmail());
+		newKing.setStartOfRule(_king.startOfRule);
+		newKing.setEndOfRule(_king.endOfRule);
+		newKing.setNumOfChildren(_king.getNumOfChildren());
 
-		db.add(newPerson);
+		database.add(newKing);
 	}
 
+	/*
 	// Removes the person with given PIN
-	public void deletePerson(Person person) {
-		Person personToRemove = null;
-		for (Person p : db) {
-			if (person.getPin().equals(p.getPin())) {
-				personToRemove = p;
+	public void removeKing(King _king) {
+		King kingToRemove = null;
+		for (King k : database) {
+			if (_king.getPin().equals(k.getPin())) {
+				kingToRemove = k;
 				break;
 			}
 		}
-		if (personToRemove != null)
-			db.remove(personToRemove);
+		if (kingToRemove != null)
+			database.remove(kingToRemove);
+	}
+*/
+	public List<King> getAllKings() {
+		return database;
 	}
 
-	public List<Person> getAllPersons() {
-		return db;
+	public void removeKing(King kingToDelete) {
+		database.remove(kingToDelete);
+		
 	}
 }
